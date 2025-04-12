@@ -1,6 +1,11 @@
 # ตั้งค่าการ build และ deploy
 [build]
-  # โฟลเดอร์ที่จะใช้ deploy
+  # โฟลเดอร์ที่มีไฟล์ static
   publish = "public"
   # ไม่ต้องรันคำสั่ง build เพราะเป็น static site
-  command = "" 
+  command = ""
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 
