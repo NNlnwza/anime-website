@@ -1,3 +1,6 @@
+# ตั้งค่าการ build และ deploy
 [build]
+  # โฟลเดอร์ที่จะใช้ deploy
   publish = "public"
+  # ไม่ต้องรันคำสั่ง build เพราะเป็น static site
   command = "" 
