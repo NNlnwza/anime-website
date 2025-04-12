@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeHiHi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Kanit:wght@300;400;500;600&family=Kodchasan:wght@400;500;600;700&family=Niramit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div href="index.html" class="nav-brand">AnimeHiHi</div>
+        <div class="nav-menu">
+            <a href="index.html" class="nav-item">หน้าแรก</a>
+            <a href="#" class="nav-item">อนิเมะทั้งหมด</a>
+            <a href="#" class="nav-item">อนิเมะยอดนิยม</a>
+            <a href="#" class="nav-item">อนิเมะใหม่</a>
+        </div>
+        <div class="nav-right">
+            <a href="favorites.html" class="bookmark-btn">
+                <i class="fas fa-bookmark"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Search Modal -->
+    <div class="search-modal" style="display: none;">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="ค้นหาอนิเมะ...">
+            <div class="search-results"></div>
+        </div>
+    </div>
+
+    <main class="watch-page">
+        <div class="video-container">
+            <div class="video-player">
+                <video id="player" playsinline controls>
+                    <source type="video/mp4">
+                </video>
+            </div>
+        </div>
+        
+        <div class="anime-details">
+            <h1 id="anime-title"></h1>
+            <div class="episode-info">
+                <span id="episode-number"></span>
+                <span id="anime-type"></span>
+            </div>
+            <p id="anime-description"></p>
+        </div>
+
+        <div class="episode-list">
+            <h2>ตอนทั้งหมด</h2>
+            <div class="episode-grid" id="episode-grid">
+                <!-- Episodes will be added here by JavaScript -->
+            </div>
+        </div>
+
+        <div class="comment-section">
+            <h2>แสดงความคิดเห็น</h2>
+            <textarea class="comment-input" placeholder="แสดงความคิดเห็นของคุณ..."></textarea>
+            <button class="comment-btn">ส่ง</button>
+            <div class="comments-container"></div>
+        </div>
+    </main>
+
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script src="data.js"></script>
+    <script src="watch.js"></script>
+</body>
+</html> 

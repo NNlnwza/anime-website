@@ -1,0 +1,854 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+    background-color: #1a1b1f;
+    color: white;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #23252b;
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.nav-brand {
+    font-family: 'Kodchasan';
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    margin-left: auto;
+    margin-right: 2rem;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    font-family: 'Kanit', sans-serif;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+    color: #ffd700;
+}
+
+.nav-right {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-btn, .bookmark-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.premium-btn {
+    font-family: 'Kodchasan';
+    background-color: #ffd700;
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Main content */
+main {
+    padding-top: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+h2 {
+    font-family: 'Kanit', sans-serif;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-size: 1.8rem;
+    color: white;
+}
+
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.anime-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    aspect-ratio: 2/3;
+}
+
+.anime-card:hover {
+    transform: scale(1.05);
+}
+
+.anime-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s;
+}
+
+.anime-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.anime-card:hover .anime-info {
+    transform: translateY(0);
+}
+
+.anime-card:hover img {
+    filter: blur(5px) brightness(0.7);
+}
+
+.anime-info h3 {
+    font-family: 'Niramit', sans-serif;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 700;
+}
+
+.type {
+    font-family: 'Kanit', sans-serif;
+    display: inline-block;
+    font-size: 0.875rem;
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.description {
+    font-family: 'Kanit', sans-serif;
+    font-size: 0.875rem;
+    color: #e0e0e0;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    font-weight: 300;
+}
+
+.description strong {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.anime-card:hover .description {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.button-group {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.anime-card:hover .button-group {
+    opacity: 1;
+}
+
+.watch-btn, .favorite-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.watch-btn:hover, .favorite-btn:hover {
+    background-color: #ffd700;
+    color: #000;
+    transform: scale(1.1);
+}
+
+.favorite-btn.active {
+    background-color: #ffd700;
+    color: #000;
+}
+
+/* Search Modal */
+.search-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+}
+
+.search-container {
+    position: relative;
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 1rem;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem;
+    background-color: #23252b;
+    border: 2px solid #ffd700;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Kanit', sans-serif;
+}
+
+.search-results {
+    margin-top: 1rem;
+    max-height: 70vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    scrollbar-width: none; /* สำหรับ Firefox */
+    -ms-overflow-style: none; /* สำหรับ Internet Explorer และ Edge */
+}
+
+/* ซ่อนแถบเลื่อนสำหรับ Chrome, Safari และ Opera */
+.search-results::-webkit-scrollbar {
+    display: none;
+}
+
+.search-result-card {
+    display: flex;
+    align-items: center;
+    background-color: #23252b;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.search-result-card:hover {
+    transform: translateX(10px);
+    background-color: #2a2c33;
+}
+
+.search-result-image {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.search-result-info {
+    flex: 1;
+    padding: 0 1rem;
+}
+
+.search-result-title {
+    font-family: 'Niramit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: white;
+}
+
+.search-result-type {
+    font-size: 0.8rem;
+    color: #ffd700;
+}
+
+.search-result-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-result-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.search-result-btn:hover {
+    background-color: #ffd700;
+    color: #000;
+    transform: scale(1.1);
+}
+
+.search-result-btn.active {
+    background-color: #ffd700;
+    color: #000;
+}
+
+/* Comments Section */
+.comments-section {
+    background-color: #23252b;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.comment-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #333333;
+    border: 1px solid #444444;
+    border-radius: 4px;
+    color: #fff;
+    font-family: 'Kanit', sans-serif;
+    resize: vertical;
+    min-height: 60px;
+}
+
+.comment-input:focus {
+    outline: none;
+    border-color: #ffd700;
+    background: #3a3a3a;
+}
+
+.comment-submit {
+    background-color: #ffd700;
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+}
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.comment {
+    background-color: #1a1b1f;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #ffd700;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+    
+    .premium-btn {
+        display: none;
+    }
+}
+
+/* Watch Page */
+.watch-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2rem 2rem 2rem;
+}
+
+.video-container {
+    width: 100%;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-top: 56.25%; /* อัตราส่วน 16:9 */
+}
+
+.video-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-element {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+    color: #fff;
+    cursor: pointer;
+}
+
+.video-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.anime-details {
+    margin-bottom: 2rem;
+}
+
+.anime-details h1 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.episode-info {
+    display: flex;
+    gap: 1rem;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.anime-details p {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.episode-list {
+    margin-bottom: 2rem;
+}
+
+.episode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.episode-item {
+    background-color: #23252b;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.episode-item:hover {
+    background-color: #2a2c33;
+    transform: translateY(-2px);
+}
+
+.episode-item.active {
+    background-color: #ffd700;
+    color: black;
+}
+
+.episode-number {
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* สไตล์ปุ่มกดใจ */
+.favorite-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.favorite-btn.active {
+    color: #ff4757;
+}
+
+.favorite-btn:hover {
+    color: #ff4757;
+}
+
+/* สไตล์หน้า favorites */
+.favorites-section {
+    padding: 2rem;
+}
+
+.favorites-section h2 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.no-favorites {
+    text-align: center;
+    color: #666;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
+/* ปรับแต่งการ์ดอนิเมะในหน้า favorites */
+.favorites-section .anime-card {
+    margin-bottom: 1rem;
+}
+
+/* สไตล์หน้า Favorites */
+.favorites-page {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.favorites-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 4rem 0 2rem 0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.favorites-header h1 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.favorites-header h1 i {
+    color: #ff4757;
+    margin-right: 0.5rem;
+}
+
+.favorites-subtitle {
+    color: #888;
+    font-size: 1.1rem;
+}
+
+.favorites-container {
+    position: relative;
+    min-height: 400px;
+}
+
+.no-favorites-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #666;
+}
+
+.no-favorites-message i.fa-heart-broken {
+    font-size: 4rem;
+    color: #ff4757;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.no-favorites-message h3 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: #fff;
+}
+
+.no-favorites-message p {
+    margin: 1rem 0;
+    color: #888;
+}
+
+.back-to-home {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #ff4757;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.back-to-home:hover {
+    background-color: #ff6b81;
+}
+
+.back-to-home i {
+    margin-right: 0.5rem;
+}
+
+/* ปรับแต่งการ์ดในหน้า Favorites */
+.favorites-page .anime-card {
+    transform: translateY(0);
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.favorites-page .anime-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.bookmark-btn.active {
+    color: #ff4757;
+}
+
+/* ปรับแต่งสีของ Plyr Player */
+:root {
+    --plyr-color-main: #ffd700;
+    --plyr-range-fill-background: #ffd700;
+    --plyr-video-controls-background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+    --plyr-menu-background: rgba(28, 28, 28, 0.9);
+    --plyr-menu-color: #fff;
+}
+
+/* ปรับแต่งปุ่มควบคุมหลัก */
+.plyr__control--overlaid {
+    background: var(--plyr-color-main) !important;
+}
+
+.plyr__control--overlaid:hover {
+    background: rgba(255, 215, 0, 0.8) !important;
+}
+
+/* ปรับแต่งปุ่มควบคุมทั่วไป */
+.plyr__control[aria-expanded=true], 
+.plyr__control:hover, 
+.plyr__control[aria-expanded=true]:hover {
+    background: var(--plyr-color-main);
+}
+
+/* ปรับแต่งแถบความคืบหน้า */
+.plyr--full-ui input[type=range] {
+    color: var(--plyr-color-main);
+}
+
+.plyr--video .plyr__progress__buffer {
+    color: rgba(255, 215, 0, 0.25);
+}
+
+/* ปรับแต่ง volume bar */
+.plyr--full-ui input[type=range].plyr__tab-focus {
+    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.35);
+}
+
+/* ปรับแต่งเมนูตั้งค่า */
+.plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::before {
+    background: var(--plyr-color-main);
+}
+
+/* ปรับแต่งสีเมื่อ hover */
+.plyr__control:hover {
+    background: var(--plyr-color-main);
+}
+
+/* ปรับแต่งสีเมื่อกำลังใช้งาน */
+.plyr__control.plyr__tab-focus {
+    background: var(--plyr-color-main);
+    box-shadow: 0 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* ปรับแต่งสีของ tooltip */
+.plyr__tooltip {
+    background: var(--plyr-menu-background);
+    color: var(--plyr-menu-color);
+}
+
+/* ปรับแต่งสีของ progress bar เมื่อ hover */
+.plyr--full-ui input[type=range]::-webkit-slider-thumb {
+    background: var(--plyr-color-main);
+}
+
+.plyr--full-ui input[type=range]::-moz-range-thumb {
+    background: var(--plyr-color-main);
+}
+
+.plyr--full-ui input[type=range]::-ms-thumb {
+    background: var(--plyr-color-main);
+}
+
+.comment-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #1a1a1a;
+    border-radius: 8px;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #333333;
+    border: 1px solid #444444;
+    border-radius: 4px;
+    color: #fff;
+    font-family: 'Kanit', sans-serif;
+    resize: vertical;
+    min-height: 60px;
+}
+
+.comment-input:focus {
+    outline: none;
+    border-color: #ffd700;
+    background: #3a3a3a;
+}
+
+.comment-btn {
+    background: #ffd700;
+    color: #000;
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    float: right;
+}
+
+.comment-btn:hover {
+    background: #ffed4a;
+}
+
+.comments-container {
+    margin-top: 2rem;
+}
+
+.comment-item {
+    background: #2a2a2a;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    position: relative;
+}
+
+.comment-text {
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-family: 'Kanit', sans-serif;
+}
+
+.comment-timestamp {
+    color: #888;
+    font-size: 0.8rem;
+    font-family: 'Kanit', sans-serif;
+}
+
+.delete-comment {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #ff4444;
+    color: #fff;
+    border: none;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+}
+
+.delete-comment:hover {
+    background: #ff6666;
+}
+
+.comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Kanit', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.like-btn:hover {
+    color: #ffd700;
+}
+
+.like-btn.active {
+    color: #ffd700;
+}
+
+.like-count {
+    font-size: 0.9rem;
+    color: #888;
+} 

@@ -1,0 +1,17 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+/node_modules
+
+# IDE
+.idea/
+.vscode/
+
+# Videos (เนื่องจากไฟล์วิดีโอมีขนาดใหญ่ ควรใช้บริการ Cloud Storage แทน)
+/videos/
+
+# Environment Variables
+.env
+.env.local 
