@@ -4,8 +4,5 @@
   "description": "Anime streaming website",
   "scripts": {
     "start": "npx serve public"
-  },
-  "dependencies": {
-    "serve": "^14.2.1"
   }
 }

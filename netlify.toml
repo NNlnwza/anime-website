@@ -2,8 +2,10 @@
 [build]
   # โฟลเดอร์ที่มีไฟล์ static
   publish = "public"
-  # ไม่ต้องรันคำสั่ง build เพราะเป็น static site
-  command = ""
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--no-optional"
 
 [[redirects]]
   from = "/*"
