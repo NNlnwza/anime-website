@@ -4,6 +4,9 @@ const episodeNumber = parseInt(urlParams.get('ep')) || 1;
 
 let player;
 
+// เก็บความคิดเห็นทั้งหมด
+let allComments = JSON.parse(localStorage.getItem('allComments')) || {};
+
 function loadAnimeDetails() {
     const anime = animeData.find(a => a.id === animeId);
     if (!anime) {
@@ -96,22 +99,9 @@ function initializePlayer(anime) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', loadAnimeDetails);
-
-function toggleSearchModal() {
-    const modal = document.querySelector('.search-modal');
-    if (!modal) return;
-    
-    if (modal.style.display === 'none' || modal.style.display === '') {
-        modal.style.display = 'block';
-        document.querySelector('.search-input').focus();
-    } else {
-        modal.style.display = 'none';
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     loadAnimeDetails();
+    displayComments();
 
     const searchInput = document.querySelector('.search-input');
     const searchResults = document.querySelector('.search-results');
@@ -164,113 +154,98 @@ function displaySearchResults(results) {
     `).join('');
 }
 
-function handleComment() {
-    const commentInput = document.querySelector('.comment-input');
+// ฟังก์ชันเพิ่มความคิดเห็น
+function addComment() {
+    const commentInput = document.getElementById('comment-input');
     const commentText = commentInput.value.trim();
+    const animeId = getAnimeIdFromUrl();
     
-    if (!commentText) {
-        alert('กรุณาใส่ความคิดเห็น');
-        return;
+    if (commentText) {
+        // สร้างความคิดเห็นใหม่
+        const newComment = {
+            id: Date.now(),
+            text: commentText,
+            timestamp: new Date().toISOString(),
+            likes: 0,
+            likedBy: []
+        };
+        
+        // เพิ่มความคิดเห็นลงในรายการ
+        if (!allComments[animeId]) {
+            allComments[animeId] = [];
+        }
+        allComments[animeId].unshift(newComment);
+        
+        // บันทึกลง localStorage
+        localStorage.setItem('allComments', JSON.stringify(allComments));
+        
+        // แสดงความคิดเห็นใหม่
+        displayComments();
+        
+        // ล้างช่องกรอก
+        commentInput.value = '';
     }
-
-    const comment = {
-        id: Date.now(),
-        text: commentText,
-        timestamp: new Date().toLocaleString('th-TH'),
-        animeId: animeId,
-        episode: episodeNumber,
-        likes: 0,
-        likedBy: []
-    };
-
-    let comments = JSON.parse(localStorage.getItem('animeComments') || '[]');
-    comments.push(comment);
-    localStorage.setItem('animeComments', JSON.stringify(comments));
-
-    displayComments();
-    commentInput.value = '';
 }
 
-function handleLike(commentId) {
-    let comments = JSON.parse(localStorage.getItem('animeComments') || '[]');
-    const commentIndex = comments.findIndex(c => c.id === commentId);
-    
-    if (commentIndex === -1) return;
-    
-    const comment = comments[commentIndex];
-    const userId = localStorage.getItem('userId') || Date.now().toString();
-    localStorage.setItem('userId', userId);
-
-    if (!comment.likedBy) {
-        comment.likedBy = [];
-    }
-
-    const hasLiked = comment.likedBy.includes(userId);
-    
-    if (hasLiked) {
-        comment.likes--;
-        comment.likedBy = comment.likedBy.filter(id => id !== userId);
-    } else {
-        comment.likes++;
-        comment.likedBy.push(userId);
-    }
-
-    comments[commentIndex] = comment;
-    localStorage.setItem('animeComments', JSON.stringify(comments));
-    displayComments();
-}
-
+// ฟังก์ชันแสดงความคิดเห็น
 function displayComments() {
-    const commentsContainer = document.querySelector('.comments-container');
-    if (!commentsContainer) {
-        const commentSection = document.createElement('div');
-        commentSection.className = 'comments-container';
-        document.querySelector('.comment-section').appendChild(commentSection);
-    }
-
-    const comments = JSON.parse(localStorage.getItem('animeComments') || '[]')
-        .filter(c => c.animeId === animeId && c.episode === episodeNumber);
-
-    const userId = localStorage.getItem('userId');
-
-    const commentsHTML = comments.map(comment => {
-        const isLiked = comment.likedBy && comment.likedBy.includes(userId);
-        return `
-            <div class="comment-item">
-                <div class="comment-text">${comment.text}</div>
-                <div class="comment-timestamp">${comment.timestamp}</div>
+    const commentsContainer = document.getElementById('comments-container');
+    const animeId = getAnimeIdFromUrl();
+    const comments = allComments[animeId] || [];
+    
+    commentsContainer.innerHTML = comments.map(comment => `
+        <div class="comment">
+            <div class="comment-content">
+                <p>${comment.text}</p>
                 <div class="comment-actions">
-                    <button onclick="handleLike(${comment.id})" class="like-btn ${isLiked ? 'active' : ''}">
+                    <button class="like-btn ${comment.likedBy.includes('user') ? 'active' : ''}" 
+                            onclick="handleLike(${comment.id})">
                         <i class="fas fa-heart"></i>
-                        <span class="like-count">${comment.likes || 0}</span>
+                        <span>${comment.likes}</span>
                     </button>
-                    <button onclick="deleteComment(${comment.id})" class="delete-comment">ลบ</button>
                 </div>
             </div>
-        `;
-    }).join('');
-
-    document.querySelector('.comments-container').innerHTML = commentsHTML || '<p>ยังไม่มีความคิดเห็น</p>';
+        </div>
+    `).join('');
 }
 
-function deleteComment(commentId) {
-    let comments = JSON.parse(localStorage.getItem('animeComments') || '[]');
-    comments = comments.filter(c => c.id !== commentId);
-    localStorage.setItem('animeComments', JSON.stringify(comments));
-    displayComments();
+// ฟังก์ชันกดไลค์
+function handleLike(commentId) {
+    const animeId = getAnimeIdFromUrl();
+    const comments = allComments[animeId] || [];
+    const comment = comments.find(c => c.id === commentId);
+    
+    if (comment) {
+        const user = 'user'; // ใช้ user เดียวกันสำหรับทุกคน
+        const index = comment.likedBy.indexOf(user);
+        
+        if (index === -1) {
+            comment.likes++;
+            comment.likedBy.push(user);
+        } else {
+            comment.likes--;
+            comment.likedBy.splice(index, 1);
+        }
+        
+        // บันทึกลง localStorage
+        localStorage.setItem('allComments', JSON.stringify(allComments));
+        
+        // แสดงความคิดเห็นใหม่
+        displayComments();
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     const commentBtn = document.querySelector('.comment-btn');
     if (commentBtn) {
-        commentBtn.addEventListener('click', handleComment);
+        commentBtn.addEventListener('click', addComment);
     }
 
     const commentInput = document.querySelector('.comment-input');
     if (commentInput) {
         commentInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                handleComment();
+                addComment();
             }
         });
     }

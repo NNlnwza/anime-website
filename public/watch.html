@@ -61,10 +61,16 @@
         </div>
 
         <div class="comment-section">
-            <h2>แสดงความคิดเห็น</h2>
-            <textarea class="comment-input" placeholder="แสดงความคิดเห็นของคุณ..."></textarea>
-            <button class="comment-btn">ส่ง</button>
-            <div class="comments-container"></div>
+            <h3>ความคิดเห็น</h3>
+            <div class="comment-input-container">
+                <input type="text" id="comment-input" placeholder="แสดงความคิดเห็น...">
+                <button class="comment-btn" onclick="addComment()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div id="comments-container" class="comments-container">
+                <!-- ความคิดเห็นจะแสดงที่นี่ -->
+            </div>
         </div>
     </main>
 
