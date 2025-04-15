@@ -10,6 +10,27 @@
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAgfSQB4WLyn-o9grSJv8kkRg7wd4wMPTk",
+            authDomain: "anime-website-2a5a9.firebaseapp.com",
+            databaseURL: "https://anime-website-2a5a9-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "anime-website-2a5a9",
+            storageBucket: "anime-website-2a5a9.firebasestorage.app",
+            messagingSenderId: "811102103836",
+            appId: "1:811102103836:web:9084ce7759b2773cfe32d9",
+            measurementId: "G-S8Q627FYSC"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 </head>
 <body>
     <nav class="navbar">

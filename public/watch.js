@@ -169,17 +169,9 @@ function addComment() {
             likedBy: []
         };
         
-        // เพิ่มความคิดเห็นลงในรายการ
-        if (!allComments[animeId]) {
-            allComments[animeId] = [];
-        }
-        allComments[animeId].unshift(newComment);
-        
-        // บันทึกลง localStorage
-        localStorage.setItem('allComments', JSON.stringify(allComments));
-        
-        // แสดงความคิดเห็นใหม่
-        displayComments();
+        // บันทึกลง Firebase
+        const commentsRef = firebase.database().ref('comments/' + animeId);
+        commentsRef.push(newComment);
         
         // ล้างช่องกรอก
         commentInput.value = '';
@@ -189,46 +181,78 @@ function addComment() {
 // ฟังก์ชันแสดงความคิดเห็น
 function displayComments() {
     const commentsContainer = document.getElementById('comments-container');
-    const comments = allComments[animeId] || [];
+    const commentsRef = firebase.database().ref('comments/' + animeId);
     
-    commentsContainer.innerHTML = comments.map(comment => `
-        <div class="comment">
-            <div class="comment-content">
-                <p>${comment.text}</p>
-                <div class="comment-actions">
-                    <button class="like-btn ${comment.likedBy.includes('user') ? 'active' : ''}" 
-                            onclick="handleLike(${comment.id})">
-                        <i class="fas fa-heart"></i>
-                        <span>${comment.likes}</span>
-                    </button>
+    // ติดตามการเปลี่ยนแปลงของข้อมูล
+    commentsRef.on('value', (snapshot) => {
+        const comments = [];
+        snapshot.forEach((childSnapshot) => {
+            const comment = childSnapshot.val();
+            comment.key = childSnapshot.key;
+            comments.unshift(comment);
+        });
+        
+        commentsContainer.innerHTML = comments.map(comment => `
+            <div class="comment">
+                <div class="comment-content">
+                    <p>${comment.text}</p>
+                    <div class="comment-info">
+                        <span class="comment-time">${formatTimestamp(comment.timestamp)}</span>
+                    </div>
+                    <div class="comment-actions">
+                        <button class="like-btn ${comment.likedBy.includes('user') ? 'active' : ''}" 
+                                onclick="handleLike('${comment.key}')">
+                            <i class="fas fa-heart"></i>
+                            <span>${comment.likes}</span>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
+        `).join('');
+    });
 }
 
-// ฟังก์ชันกดไลค์
-function handleLike(commentId) {
-    const comments = allComments[animeId] || [];
-    const comment = comments.find(c => c.id === commentId);
+// ฟังก์ชันจัดการไลค์
+function handleLike(commentKey) {
+    const commentsRef = firebase.database().ref('comments/' + animeId + '/' + commentKey);
     
-    if (comment) {
-        const user = 'user'; // ใช้ user เดียวกันสำหรับทุกคน
-        const index = comment.likedBy.indexOf(user);
+    commentsRef.once('value').then((snapshot) => {
+        const comment = snapshot.val();
+        const user = 'user'; // ในอนาคตควรใช้ ID ของผู้ใช้จริง
+        const likedIndex = comment.likedBy.indexOf(user);
         
-        if (index === -1) {
+        if (likedIndex === -1) {
             comment.likes++;
             comment.likedBy.push(user);
         } else {
             comment.likes--;
-            comment.likedBy.splice(index, 1);
+            comment.likedBy.splice(likedIndex, 1);
         }
         
-        // บันทึกลง localStorage
-        localStorage.setItem('allComments', JSON.stringify(allComments));
-        
-        // แสดงความคิดเห็นใหม่
-        displayComments();
+        commentsRef.update({
+            likes: comment.likes,
+            likedBy: comment.likedBy
+        });
+    });
+}
+
+// ฟังก์ชันจัดรูปแบบเวลา
+function formatTimestamp(timestamp) {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diff = now - date;
+    
+    // แปลงเวลาเป็นภาษาไทย
+    if (diff < 60000) { // น้อยกว่า 1 นาที
+        return 'เมื่อสักครู่';
+    } else if (diff < 3600000) { // น้อยกว่า 1 ชั่วโมง
+        const minutes = Math.floor(diff / 60000);
+        return `${minutes} นาทีที่แล้ว`;
+    } else if (diff < 86400000) { // น้อยกว่า 1 วัน
+        const hours = Math.floor(diff / 3600000);
+        return `${hours} ชั่วโมงที่แล้ว`;
+    } else {
+        return date.toLocaleDateString('th-TH');
     }
 }
 
