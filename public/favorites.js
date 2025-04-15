@@ -134,4 +134,34 @@ function displaySearchResults(results) {
             </div>
         </div>
     `).join('');
+}
+
+// แสดงอนิเมะที่ถูกใจ
+function displayFavorites() {
+    const favoritesContainer = document.getElementById('favorites-grid');
+    const noFavoritesMessage = document.querySelector('.no-favorites-message');
+    
+    // ดึงรายการอนิเมะที่ถูกใจจาก localStorage
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    
+    if (favorites.length === 0) {
+        favoritesContainer.style.display = 'none';
+        noFavoritesMessage.style.display = 'flex';
+        return;
+    }
+    
+    // จัดเรียงอนิเมะใหม่ล่าสุดอยู่บน
+    const sortedFavorites = [...favorites].reverse();
+    
+    favoritesContainer.style.display = 'grid';
+    noFavoritesMessage.style.display = 'none';
+    favoritesContainer.innerHTML = '';
+    
+    sortedFavorites.forEach(animeId => {
+        const anime = animeData.find(a => a.id === animeId);
+        if (anime) {
+            const card = createAnimeCard(anime);
+            favoritesContainer.appendChild(card);
+        }
+    });
 } 

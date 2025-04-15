@@ -111,6 +111,18 @@ function createAnimeCard(anime) {
     return card;
 }
 
+// แสดงการ์ดอนิเมะ
+function displayAnimeCards(animeList, container) {
+    // จัดเรียงอนิเมะใหม่ล่าสุดอยู่บน
+    const sortedAnime = [...animeList].reverse();
+    
+    container.innerHTML = '';
+    sortedAnime.forEach(anime => {
+        const card = createAnimeCard(anime);
+        container.appendChild(card);
+    });
+}
+
 // เพิ่ม Event Listeners เมื่อโหลดหน้า
 document.addEventListener('DOMContentLoaded', () => {
     // สร้างการ์ดอนิเมะ
