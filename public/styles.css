@@ -8,36 +8,40 @@ body {
     font-family: 'Kanit', sans-serif;
     background-color: #1a1b1f;
     color: white;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Navbar */
 .navbar {
     background-color: #23252b;
-    padding: 1rem 2rem;
+    padding: 1rem;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     z-index: 1000;
     height: 50px;
+    padding-left: 1;
 }
 
 .nav-brand {
     font-family: 'Kodchasan';
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    color: #fff;
+    color: white;
+    margin-right: 1rem;
+    margin-left: 0;
     text-decoration: none;
 }
 
 .nav-menu {
     display: flex;
     gap: 1rem;
+    margin-left: 0;
     margin-right: auto;
-    margin-left: 1rem;
 }
 
 .nav-item {
@@ -47,7 +51,7 @@ body {
     font-size: 0.9rem;
     transition: color 0.3s ease;
     text-align: left;
-    padding: 0.5rem 0.8rem;
+    padding: 0.5rem 0.5rem;
 }
 
 .nav-item:hover {
@@ -56,8 +60,9 @@ body {
 
 .nav-right {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     align-items: center;
+    margin-left: auto;
 }
 
 .search-btn, .bookmark-btn {
@@ -66,6 +71,7 @@ body {
     color: white;
     font-size: 1.2rem;
     cursor: pointer;
+    padding: 5px;
 }
 
 .premium-btn {
@@ -86,6 +92,7 @@ main {
     margin: 0 auto;
     padding-left: 1rem;
     padding-right: 1rem;
+    overflow: hidden;
 }
 
 section {
@@ -115,6 +122,8 @@ section h2 {
     margin-bottom: 1rem;
     scrollbar-width: thin;
     scrollbar-color: #ffd700 #23252b;
+    width: 100%;
+    margin-right: 0;
 }
 
 .anime-grid::-webkit-scrollbar {
@@ -154,7 +163,8 @@ section h2 {
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         position: relative;
-        padding: 0 1rem;
+        padding: 0 20px;
+        margin: 0;
     }
 
     .anime-grid::-webkit-scrollbar {
@@ -164,6 +174,11 @@ section h2 {
     .anime-card {
         width: 160px;
         height: 240px;
+    }
+
+    .nav-brand {
+        margin-left: 0;
+        margin-right: auto;
     }
 }
 
@@ -1077,7 +1092,7 @@ section h2 {
 
 .hamburger-menu {
     display: none;
-    font-size: 24px;
+    font-size: 1.2rem;
     color: white;
     cursor: pointer;
     padding: 10px;
@@ -1104,7 +1119,21 @@ section h2 {
 @media screen and (max-width: 768px) {
     .hamburger-menu {
         display: block;
-        margin-left: auto;
+        order: 2;
+        margin: 0;
+    }
+
+    .nav-right {
+        margin: 0;
+        gap: 1rem;
+        order: 1;
+        padding-right: 0rem;
+    }
+
+    .navbar {
+        justify-content: flex-end;
+        gap: 1rem;
+        padding-right: 0;
     }
 
     .nav-menu {
@@ -1181,9 +1210,14 @@ section h2 {
     }
 
     .anime-info {
-        transform: translateY(65%);
-        opacity: 1;
+        transform: translateY(100%);
+        opacity: 0;
         background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
+    }
+
+    .anime-card:active .anime-info {
+        transform: translateY(0);
+        opacity: 1;
     }
 
     .anime-info h3 {
@@ -1231,6 +1265,7 @@ section h2 {
 .section-header {
     position: relative;
     margin-bottom: 1.5rem;
+    width: 100%;
 }
 
 .section-header h2 {
@@ -1248,7 +1283,7 @@ section h2 {
     justify-content: space-between;
     pointer-events: none;
     z-index: 10;
-    padding: 0 -10px;
+    width: 100%;
 }
 
 .scroll-btn {
