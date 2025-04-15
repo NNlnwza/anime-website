@@ -80,6 +80,84 @@ function toggleSearchModal() {
 
 // เพิ่ม Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
+    const favoritesGrid = document.getElementById('favorites-grid');
+    const template = document.getElementById('anime-card-template');
+    const noFavoritesMessage = document.querySelector('.no-favorites-message');
+
+    function createAnimeCard(anime) {
+        const card = template.content.cloneNode(true);
+        const animeCard = card.querySelector('.anime-card');
+        
+        // Set image
+        const img = animeCard.querySelector('img');
+        img.src = anime.image;
+        img.alt = anime.title;
+
+        // Set info
+        animeCard.querySelector('h3').textContent = anime.title;
+        animeCard.querySelector('.type').textContent = anime.type;
+        animeCard.querySelector('.description').textContent = anime.description;
+
+        // Set up watch button
+        const watchBtn = animeCard.querySelector('.watch-btn');
+        watchBtn.onclick = () => {
+            window.location.href = `watch.html?id=${anime.id}&episode=1`;
+        };
+
+        // Set up favorite button
+        const favoriteBtn = animeCard.querySelector('.favorite-btn');
+        favoriteBtn.classList.add('active');
+        favoriteBtn.onclick = () => {
+            toggleFavorite(anime.id, favoriteBtn);
+            // Remove card with animation
+            animeCard.style.opacity = '0';
+            setTimeout(() => {
+                animeCard.remove();
+                checkEmptyFavorites();
+            }, 300);
+        };
+
+        return animeCard;
+    }
+
+    function loadFavorites() {
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        favoritesGrid.innerHTML = '';
+
+        if (favorites.length === 0) {
+            noFavoritesMessage.style.display = 'block';
+            return;
+        }
+
+        noFavoritesMessage.style.display = 'none';
+        favorites.forEach(favoriteId => {
+            const anime = animeData.find(a => a.id === favoriteId);
+            if (anime) {
+                const card = createAnimeCard(anime);
+                favoritesGrid.appendChild(card);
+            }
+        });
+    }
+
+    function checkEmptyFavorites() {
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        if (favorites.length === 0) {
+            noFavoritesMessage.style.display = 'block';
+        }
+    }
+
+    function toggleFavorite(animeId, button) {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        const index = favorites.indexOf(animeId);
+        
+        if (index > -1) {
+            favorites.splice(index, 1);
+            button.classList.remove('active');
+        }
+        
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+
     loadFavorites();
     
     // ตั้งค่าการค้นหา

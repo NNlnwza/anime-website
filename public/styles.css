@@ -251,76 +251,55 @@ section h2 {
     display: flex;
     gap: 0.5rem;
     margin-top: 0.5rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
-.anime-card:hover .button-group {
-    opacity: 1;
-}
-
-.watch-btn {
-    background: rgba(0, 0, 0, 0.8);
-    color: #ffd700;
+.watch-btn,
+.favorite-btn {
     padding: 0.5rem 1rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    border: 2px solid #ffd700;
-    font-weight: 500;
-    z-index: 1;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
 }
 
-.watch-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #ffd700, #ffed4a);
-    transition: all 0.5s ease;
-    z-index: -1;
+.watch-btn {
+    color: #ffd700;
+    border-color: #ffd700;
+    flex: 1;
 }
 
 .watch-btn:hover {
+    background: #ffd700;
     color: #000;
-    border-color: transparent;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    transform: scale(1.05);
 }
 
-.watch-btn:hover::before {
-    left: 0;
-}
-
-.watch-btn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
-}
-
-.watch-btn i {
-    margin-right: 5px;
-    transition: transform 0.3s ease;
-    color: #ffd700;
-}
-
-.watch-btn:hover i {
-    transform: scale(1.2);
-    color: #000;
+.favorite-btn {
+    color: #ff4757;
+    border-color: #ff4757;
+    flex: 1;
 }
 
 .favorite-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 71, 87, 0.2);
+    transform: scale(1.05);
 }
 
 .favorite-btn.active {
+    background: rgba(255, 71, 87, 0.2);
     color: #ff4757;
+}
+
+@media (max-width: 768px) {
+    .watch-btn,
+    .favorite-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
 }
 
 /* Search Modal */
@@ -751,21 +730,22 @@ section h2 {
 
 /* สไตล์หน้า Favorites */
 .favorites-page {
-    padding: 2rem;
+    padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
+    padding-top: 3rem;
 }
 
 .favorites-header {
     text-align: center;
-    margin-bottom: 3rem;
-    padding: 4rem 0 2rem 0;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    padding-top: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .favorites-header h1 {
-    font-family: 'Kanit', sans-serif;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #fff;
     margin-bottom: 1rem;
 }
@@ -776,60 +756,91 @@ section h2 {
 }
 
 .favorites-subtitle {
-    color: #888;
-    font-size: 1.1rem;
+    color: #ccc;
+    font-size: 1rem;
 }
 
 .favorites-container {
-    position: relative;
-    min-height: 400px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.favorites-container .anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
 }
 
 .no-favorites-message {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
-    color: #666;
-}
-
-.no-favorites-message i.fa-heart-broken {
-    font-size: 4rem;
-    color: #ff4757;
-    margin-bottom: 1rem;
-    opacity: 0.6;
-}
-
-.no-favorites-message h3 {
-    font-family: 'Kanit', sans-serif;
-    font-size: 1.5rem;
-    margin: 1rem 0;
+    padding: 2rem;
     color: #fff;
 }
 
+.no-favorites-message i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #ff6b6b;
+}
+
+.no-favorites-message h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
 .no-favorites-message p {
-    margin: 1rem 0;
-    color: #888;
+    color: #ccc;
+    margin-bottom: 1.5rem;
 }
 
 .back-to-home {
     display: inline-block;
-    margin-top: 1.5rem;
-    padding: 0.8rem 1.5rem;
-    background-color: #ff4757;
-    color: white;
-    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: #ffd700;
+    color: #000;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .back-to-home:hover {
-    background-color: #ff6b81;
+    background-color: #ffed4a;
+    transform: scale(1.05);
 }
 
-.back-to-home i {
-    margin-right: 0.5rem;
+@media (max-width: 768px) {
+    .favorites-container .anime-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+
+    .favorites-header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .favorites-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .favorites-page {
+        padding: 0.5rem;
+    }
+
+    .no-favorites-message i {
+        font-size: 2rem;
+    }
+
+    .no-favorites-message h3 {
+        font-size: 1.2rem;
+    }
+
+    .no-favorites-message p {
+        font-size: 0.9rem;
+    }
 }
 
 /* ปรับแต่งการ์ดในหน้า Favorites */
@@ -1421,28 +1432,108 @@ section h2 {
     }
 }
 
-.favorites-container .anime-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem;
-    overflow: visible;
-}
-
 .favorites-container .anime-card {
+    position: relative;
     width: 100%;
     height: 300px;
-    margin: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.favorites-container .anime-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.favorites-container .anime-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.favorites-container .anime-card:hover .anime-info {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.favorites-container .anime-card:hover img {
+    filter: blur(3px) brightness(0.7);
+}
+
+.favorites-container .button-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.favorites-container .watch-btn,
+.favorites-container .favorite-btn {
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.favorites-container .watch-btn {
+    background: rgba(0, 0, 0, 0.8);
+    color: #ffd700;
+    border: 2px solid #ffd700;
+}
+
+.favorites-container .watch-btn:hover {
+    background: #ffd700;
+    color: #000;
+}
+
+.favorites-container .favorite-btn {
+    background: rgba(0, 0, 0, 0.8);
+    color: #ff4757;
+    border: 2px solid #ff4757;
+}
+
+.favorites-container .favorite-btn:hover {
+    background: rgba(255, 71, 87, 0.2);
+}
+
+.favorites-container .favorite-btn.active {
+    color: #ff4757;
+    background: rgba(255, 71, 87, 0.2);
 }
 
 @media screen and (max-width: 768px) {
-    .favorites-container .anime-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 1rem;
+    .favorites-container .anime-info {
+        transform: translateY(65%);
+        opacity: 1;
+        padding: 0.8rem;
     }
 
-    .favorites-container .anime-card {
-        height: 240px;
+    .favorites-container .button-group {
+        margin-top: 0.5rem;
+    }
+
+    .favorites-container .watch-btn,
+    .favorites-container .favorite-btn {
+        padding: 0.4rem;
+        font-size: 0.85rem;
+    }
+
+    .favorites-container .anime-card:active .anime-info {
+        transform: translateY(0);
     }
 }
 

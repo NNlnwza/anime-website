@@ -765,5 +765,114 @@ const animeData = [
                 videoUrl: getDropboxDirectURL("Jujutsukaisen/Jujutsukaisen_12.mp4")
             }
         ]
+    },
+    {
+        id: 'blue-box',
+        title: 'Blue Box',
+        type: 'ซับไทย',
+        description: 'ทกิ นักเรียนมัธยมต้นที่แอบชอบรุ่นพี่สาว ชินัตสึ นักบาสสาวดาวเด่น ทั้งสองต้องมาอยู่บ้านเดียวกัน ทำให้ความสัมพันธ์ค่อยๆ พัฒนา ท่ามกลางความฝันและการแข่งขันกีฬา.',
+        image: 'images/box.jpg',
+        episodes: [
+            {
+                number: 1,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/sy1k3y8wvy0jx7jtl178m/1-Anime-Sugoi-Anime.mp4?rlkey=axg4pns8rpub0okzvb14l054r&st=de1r9vn5&dl=0")
+            },
+            {
+                number: 2,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/nfq3nb62f3ye3uqnaid8m/2-Anime-Sugoi-Anime.mp4?rlkey=bn34zrgfa3fktpbngxnngjf9k&st=pa9rxmus&dl=0")
+            },
+            {
+                number: 3,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/ko8r530u5wrepaq9mdo5y/3-Anime-Sugoi-Anime.mp4?rlkey=iqyn4rcqbyztq8mh8tuf2pr1t&st=nrvps1o0&dl=0")
+            },
+            {
+                number: 4,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/449h8nyjv4c7ke5gvwz63/4-Anime-Sugoi-Anime.mp4?rlkey=twh52tr0irmxvejhvq70i9wz5&st=4f8rf9od&dl=0")
+            },
+            {
+                number: 5,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/yfs6it8jrv3t6dex2wei2/5-Anime-Sugoi-Anime.mp4?rlkey=xp9ay6mvdx2x05sxsideyj0gk&st=sn28g79c&dl=0")
+            },
+            {
+                number: 6,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/hsshjyqbjmzbhvtg6kvlk/6-Anime-Sugoi-Anime.mp4?rlkey=jvng2rjmosur98uoc74al2s8y&st=17qavfhg&dl=0")
+            },
+            {
+                number: 7,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/nbwnmyxce6j4puy1isd68/7-Anime-Sugoi-Anime.mp4?rlkey=30xu5z0n2louqiap93zabug5z&st=0367eher&dl=0")
+            },
+            {
+                number: 8,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/2t2esxoo26ti4ue5qskzh/8-Anime-Sugoi-Anime.mp4?rlkey=0cskuc3idxostz3rp8fq5vvlx&st=k6qqia1u&dl=0")
+            },
+            {
+                number: 9,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/t0deqvqabug1p5qyvwnnz/9-Anime-Sugoi-Anime.mp4?rlkey=iemndttmszlfmt38spw5xz03v&st=8iq16vek&dl=0")
+            },
+            {
+                number: 10,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/970qil22tutr8ebv0nn28/10-Anime-Sugoi-Anime.mp4?rlkey=14e2aeztw8qi5vhzecskuecaz&st=xggilk0m&dl=0")
+            },
+            {
+                number: 11,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/0nfaz7cx73ffuf15dddru/11-Anime-Sugoi-Anime.mp4?rlkey=zalboq1c9ul0nh5tal5xyxact&st=t7q4ihlk&dl=0")
+            },
+            {
+                number: 12,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/ir025pl81118g8dp22b77/12-Anime-Sugoi-Anime.mp4?rlkey=vvdfds57bfvygn2m8i2nulpkv&st=3td95ju4&dl=0")
+            },
+            {
+                number: 13,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/ydzympk3o3aq6m5cnm4jb/13-Anime-Sugoi-Anime.mp4?rlkey=dbxpz437xzqb8kggxdhkduugg&st=q0q8bqc3&dl=0")
+            },
+            {
+                number: 14,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/7alc8tjpvc5euh7fock3z/14-Anime-Sugoi-Anime.mp4?rlkey=b31r2isv8a0wmono29m03tgtl&st=kt9vxqji&dl=0")
+            },
+            {
+                number: 15,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/9hlim3l2yq3xh3jm7bdjm/15-Anime-Sugoi-Anime.mp4?rlkey=lzntoemuda28a3qq82ae8hfqv&st=ni5yi79t&dl=0")
+            },
+            {
+                number: 16,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/tifktjyfw99jaqyekclsa/16-Anime-Sugoi-Anime.mp4?rlkey=g7evb20291f44ws2h2mz0ym2a&st=vhzzyrp3&dl=0")
+            },
+            {
+                number: 17,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/67lrgv6gmpq5by75v17rd/17-Anime-Sugoi-Anime.mp4?rlkey=otyz130oatawt290qsaq5ma9m&st=bdykbwgq&dl=0")
+            },
+            {
+                number: 18,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/l586uh7xq10fb6rm7x9xi/18-Anime-Sugoi-Anime.mp4?rlkey=buwrolp11z2ql4aqgdvp4837p&st=mtdaovmm&dl=0")
+            },
+            {
+                number: 19,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/9tt88aajs6ouvod70ensl/19-Anime-Sugoi-Anime.mp4?rlkey=9rp2dioxedtgjol5xcyfzoga1&st=luo82kz3&dl=0")
+            },
+            {
+                number: 20,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/6takx60iys006d3cvh86s/20-Anime-Sugoi-Anime.mp4?rlkey=11m5wlpbbp2srtjkzcu05owrd&st=0eqi9217&dl=0")
+            },
+            {
+                number: 21,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/r17xjain2fm3rp7p4mui7/21-Anime-Sugoi-Anime.mp4?rlkey=jmmwz40ezz74xpczur2evhu17&st=w3xi6tl7&dl=0")
+            },
+            {
+                number: 22,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/2yv2bypjri3mrepl1rddg/22-Anime-Sugoi-Anime.mp4?rlkey=ymqq7attt23iywki7m5xsjrjo&st=rwmtbvon&dl=0")
+            },
+            {
+                number: 23,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/cowdoqu4cepq81fnx82fo/23-Anime-Sugoi-Anime.mp4?rlkey=swbqpxjl9hskhf0ce7gyr3nsb&st=ud6p1q29&dl=0")
+            },
+            {
+                number: 24,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/u89m6i5966mg1rn99rdp1/24-Anime-Sugoi-Anime.mp4?rlkey=dzxblacp5puvu80w66onrgexi&st=ayrxozg9&dl=0")
+            },
+            {
+                number: 25,
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/c5y9nqj22o8v85bsj1iyy/25-Anime-Sugoi-Anime.mp4?rlkey=huh9k0hvw7s474jwqrzkx7qse&st=x1xq56ij&dl=0")
+            }
+        ]
     }
 ]; 
