@@ -102,6 +102,7 @@ function initializePlayer(anime) {
 document.addEventListener('DOMContentLoaded', () => {
     loadAnimeDetails();
     displayComments();
+    initRatingSystem();
 
     const searchInput = document.querySelector('.search-input');
     const searchResults = document.querySelector('.search-results');
@@ -322,4 +323,109 @@ function formatTimestamp(timestamp) {
     } else {
         return date.toLocaleDateString('th-TH');
     }
+}
+
+// เพิ่มฟังก์ชัน toggleMenu
+function toggleMenu() {
+    const menu = document.querySelector('.nav-menu');
+    const hamburger = document.querySelector('.hamburger-menu');
+    menu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+}
+
+// เพิ่มฟังก์ชันสำหรับระบบให้คะแนน
+function initRatingSystem() {
+    const stars = document.querySelectorAll('.rating-stars i');
+    const ratingInfo = document.querySelector('.rating-info');
+    const averageRating = document.querySelector('.average-rating');
+    const ratingCount = document.querySelector('.rating-count');
+
+    // โหลดคะแนนจาก Firebase
+    loadRatings();
+
+    // Event listeners สำหรับ hover effect
+    stars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+            const rating = parseInt(star.dataset.rating);
+            updateStarsHover(rating);
+        });
+
+        star.addEventListener('mouseout', () => {
+            clearStarsHover();
+            updateStarsDisplay();
+        });
+
+        star.addEventListener('click', () => {
+            const rating = parseInt(star.dataset.rating);
+            submitRating(rating);
+        });
+    });
+}
+
+function updateStarsHover(rating) {
+    const stars = document.querySelectorAll('.rating-stars i');
+    stars.forEach(star => {
+        const starRating = parseInt(star.dataset.rating);
+        if (starRating <= rating) {
+            star.classList.add('hover');
+        } else {
+            star.classList.remove('hover');
+        }
+    });
+}
+
+function clearStarsHover() {
+    const stars = document.querySelectorAll('.rating-stars i');
+    stars.forEach(star => star.classList.remove('hover'));
+}
+
+function updateStarsDisplay(userRating = 0) {
+    const stars = document.querySelectorAll('.rating-stars i');
+    stars.forEach(star => {
+        const starRating = parseInt(star.dataset.rating);
+        if (starRating <= userRating) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+
+function loadRatings() {
+    const ratingsRef = firebase.database().ref(`ratings/${animeId}`);
+    ratingsRef.on('value', (snapshot) => {
+        const ratings = snapshot.val() || {};
+        const ratingValues = Object.values(ratings);
+        
+        if (ratingValues.length > 0) {
+            const average = ratingValues.reduce((a, b) => a + b, 0) / ratingValues.length;
+            updateRatingDisplay(average, ratingValues.length);
+        } else {
+            updateRatingDisplay(0, 0);
+        }
+
+        // แสดงคะแนนของผู้ใช้ถ้ามี
+        const userRating = ratings['user'] || 0;
+        updateStarsDisplay(userRating);
+    });
+}
+
+function submitRating(rating) {
+    const ratingsRef = firebase.database().ref(`ratings/${animeId}`);
+    ratingsRef.child('user').set(rating)
+        .then(() => {
+            console.log('บันทึกคะแนนสำเร็จ');
+        })
+        .catch((error) => {
+            console.error('เกิดข้อผิดพลาดในการบันทึกคะแนน:', error);
+            alert('ไม่สามารถบันทึกคะแนนได้');
+        });
+}
+
+function updateRatingDisplay(average, count) {
+    const averageRating = document.querySelector('.average-rating');
+    const ratingCount = document.querySelector('.rating-count');
+    
+    averageRating.textContent = average.toFixed(1);
+    ratingCount.textContent = `(${count} รีวิว)`;
 }

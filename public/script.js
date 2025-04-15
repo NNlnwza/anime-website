@@ -1,30 +1,12 @@
 // คลังอนิเมะที่กดใจ
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+// จำนวนการเข้าชมของแต่ละอนิเมะ
+let viewCounts = JSON.parse(localStorage.getItem('viewCounts')) || {};
 
-// ฟังก์ชันสร้างการ์ดอนิเมะ
-function createAnimeCards() {
-    const animeGrid = document.querySelector('.anime-grid');
-    if (!animeGrid) return;
-
-    animeGrid.innerHTML = animeData.map(anime => `
-        <div class="anime-card" data-anime-id="${anime.id}">
-            <img src="${anime.image}" alt="${anime.title}">
-            <div class="anime-info">
-                <h3>${anime.title}</h3>
-                <span class="type">${anime.type}</span>
-                <p class="description">${anime.description}</p>
-            </div>
-            <div class="button-group">
-                <button class="watch-btn" onclick="playAnime('${anime.id}')">
-                    <i class="fas fa-play"></i>
-                </button>
-                <button class="favorite-btn ${favorites.includes(anime.id) ? 'active' : ''}" 
-                        onclick="toggleFavorite('${anime.id}', this)">
-                    <i class="fas fa-heart"></i>
-                </button>
-            </div>
-        </div>
-    `).join('');
+// ฟังก์ชันเพิ่มจำนวนการเข้าชม
+function incrementViewCount(animeId) {
+    viewCounts[animeId] = (viewCounts[animeId] || 0) + 1;
+    localStorage.setItem('viewCounts', JSON.stringify(viewCounts));
 }
 
 // ฟังก์ชันเพิ่ม/ลบอนิเมะที่ถูกใจ
@@ -82,10 +64,11 @@ function toggleSearchModal() {
 
 // ฟังก์ชันเล่นอนิเมะ
 function playAnime(animeId) {
+    incrementViewCount(animeId);
     window.location.href = `watch.html?id=${animeId}&ep=1`;
 }
 
-// แก้ไขฟังก์ชัน createAnimeCard
+// ฟังก์ชันสร้างการ์ดอนิเมะ
 function createAnimeCard(anime) {
     const card = document.createElement('div');
     card.className = 'anime-card';
@@ -97,10 +80,11 @@ function createAnimeCard(anime) {
         <img src="${anime.image}" alt="${anime.title}">
         <div class="anime-info">
             <h3>${anime.title}</h3>
-            <p>${anime.type}</p>
-            <div class="anime-actions">
-                <button class="play-btn" onclick="window.location.href='watch.html?id=${anime.id}'">
-                    <i class="fas fa-play"></i> ดูตอนนี้
+            <span class="type">${anime.type}</span>
+            <p class="description">${anime.description}</p>
+            <div class="button-group">
+                <button class="watch-btn" onclick="playAnime('${anime.id}')">
+                    <i class="fas fa-play"></i>
                 </button>
                 <button class="favorite-btn ${isFavorite ? 'active' : ''}" onclick="toggleFavorite('${anime.id}', this)">
                     <i class="fas fa-heart"></i>
@@ -111,23 +95,8 @@ function createAnimeCard(anime) {
     return card;
 }
 
-// แสดงการ์ดอนิเมะ
-function displayAnimeCards(animeList, container) {
-    // จัดเรียงอนิเมะใหม่ล่าสุดอยู่บน
-    const sortedAnime = [...animeList].reverse();
-    
-    container.innerHTML = '';
-    sortedAnime.forEach(anime => {
-        const card = createAnimeCard(anime);
-        container.appendChild(card);
-    });
-}
-
 // เพิ่ม Event Listeners เมื่อโหลดหน้า
 document.addEventListener('DOMContentLoaded', () => {
-    // สร้างการ์ดอนิเมะ
-    createAnimeCards();
-    
     // ตั้งค่าการค้นหา
     const searchInput = document.querySelector('.search-input');
     if (searchInput) {
@@ -153,4 +122,129 @@ document.addEventListener('DOMContentLoaded', () => {
     if (searchBtn) {
         searchBtn.addEventListener('click', toggleSearchModal);
     }
-}); 
+
+    // แสดงอนิเมะแนะนำ (10 เรื่องที่มีคนดูมากที่สุด)
+    const recommendedGrid = document.querySelector('#recommended .anime-grid');
+    if (recommendedGrid) {
+        const sortedByViews = [...animeData].sort((a, b) => {
+            const viewsA = viewCounts[a.id] || 0;
+            const viewsB = viewCounts[b.id] || 0;
+            return viewsB - viewsA;
+        });
+        
+        sortedByViews.slice(0, 10).forEach(anime => {
+            const card = createAnimeCard(anime);
+            recommendedGrid.appendChild(card);
+        });
+    }
+
+    // แสดงอนิเมะมาใหม่ (10 เรื่องล่าสุด)
+    const newAnimeGrid = document.querySelector('#new-anime .anime-grid');
+    if (newAnimeGrid) {
+        const latestAnime = [...animeData].reverse().slice(0, 10);
+        latestAnime.forEach(anime => {
+            const card = createAnimeCard(anime);
+            newAnimeGrid.appendChild(card);
+        });
+    }
+
+    // แสดงอนิเมะทั้งหมด (เรียงตามตัวอักษร)
+    const allAnimeGrid = document.querySelector('#all-anime .anime-grid');
+    if (allAnimeGrid) {
+        const sortedByTitle = [...animeData].sort((a, b) => 
+            a.title.localeCompare(b.title, 'th')
+        );
+        sortedByTitle.forEach(anime => {
+            const card = createAnimeCard(anime);
+            allAnimeGrid.appendChild(card);
+        });
+    }
+
+    // เพิ่ม event listener สำหรับการเลื่อนในแต่ละส่วน
+    const sections = ['recommended', 'new-anime', 'all-anime'];
+    sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            const animeGrid = section.querySelector('.anime-grid');
+            animeGrid.addEventListener('scroll', function() {
+                const isAtEnd = this.scrollLeft + this.clientWidth >= this.scrollWidth - 10;
+                const scrollLeftBtn = section.querySelector('.scroll-left');
+                const scrollRightBtn = section.querySelector('.scroll-right');
+                
+                if (isAtEnd) {
+                    scrollRightBtn.innerHTML = '<i class="fas fa-angle-double-left"></i>';
+                    scrollRightBtn.onclick = () => scrollToStart(sectionId);
+                    scrollRightBtn.classList.add('to-start');
+                } else {
+                    scrollRightBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                    scrollRightBtn.onclick = () => scrollAnimeList('right', sectionId);
+                    scrollRightBtn.classList.remove('to-start');
+                }
+                
+                if (this.scrollLeft <= 0) {
+                    scrollLeftBtn.style.opacity = '0.5';
+                    scrollLeftBtn.style.cursor = 'not-allowed';
+                } else {
+                    scrollLeftBtn.style.opacity = '1';
+                    scrollLeftBtn.style.cursor = 'pointer';
+                }
+            });
+        }
+    });
+});
+
+function toggleMenu() {
+    const menu = document.querySelector('.nav-menu');
+    const hamburger = document.querySelector('.hamburger-menu');
+    menu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+}
+
+function scrollAnimeList(direction, sectionId) {
+    const section = document.getElementById(sectionId);
+    const animeGrid = section.querySelector('.anime-grid');
+    const scrollAmount = direction === 'left' ? -300 : 300;
+    animeGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    
+    // ตรวจสอบว่าเลื่อนถึงท้ายหรือยัง
+    setTimeout(() => {
+        const isAtEnd = animeGrid.scrollLeft + animeGrid.clientWidth >= animeGrid.scrollWidth - 10;
+        const scrollLeftBtn = section.querySelector('.scroll-left');
+        const scrollRightBtn = section.querySelector('.scroll-right');
+        
+        // แสดง/ซ่อนปุ่มตามตำแหน่งการเลื่อน
+        if (isAtEnd) {
+            scrollRightBtn.innerHTML = '<i class="fas fa-angle-double-left"></i>';
+            scrollRightBtn.onclick = () => scrollToStart(sectionId);
+            scrollRightBtn.classList.add('to-start');
+        } else {
+            scrollRightBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            scrollRightBtn.onclick = () => scrollAnimeList('right', sectionId);
+            scrollRightBtn.classList.remove('to-start');
+        }
+        
+        // ตรวจสอบว่าอยู่ที่จุดเริ่มต้นหรือไม่
+        if (animeGrid.scrollLeft <= 0) {
+            scrollLeftBtn.style.opacity = '0.5';
+            scrollLeftBtn.style.cursor = 'not-allowed';
+        } else {
+            scrollLeftBtn.style.opacity = '1';
+            scrollLeftBtn.style.cursor = 'pointer';
+        }
+    }, 300);
+}
+
+function scrollToStart(sectionId) {
+    const section = document.getElementById(sectionId);
+    const animeGrid = section.querySelector('.anime-grid');
+    const scrollRightBtn = section.querySelector('.scroll-right');
+    
+    animeGrid.scrollTo({ left: 0, behavior: 'smooth' });
+    
+    // เปลี่ยนปุ่มกลับเป็นปุ่มเลื่อนขวา
+    setTimeout(() => {
+        scrollRightBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        scrollRightBtn.onclick = () => scrollAnimeList('right', sectionId);
+        scrollRightBtn.classList.remove('to-start');
+    }, 300);
+} 

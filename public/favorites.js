@@ -164,4 +164,9 @@ function displayFavorites() {
             favoritesContainer.appendChild(card);
         }
     });
+}
+
+function toggleMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    navMenu.classList.toggle('active');
 } 

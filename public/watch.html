@@ -34,12 +34,15 @@
 </head>
 <body>
     <nav class="navbar">
-        <div href="index.html" class="nav-brand">AnimeHiHi</div>
+        <a href="index.html" class="nav-brand">AnimeHiHi</a>
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
         <div class="nav-menu">
             <a href="index.html" class="nav-item">หน้าแรก</a>
-            <a href="#" class="nav-item">อนิเมะทั้งหมด</a>
-            <a href="#" class="nav-item">อนิเมะยอดนิยม</a>
-            <a href="#" class="nav-item">อนิเมะใหม่</a>
+            <a href="#" class="nav-item">ซัพไทย</a>
+            <a href="#" class="nav-item">พากย์ไทย</a>
+            <a href="#" class="nav-item">เดอะมูฟวี่</a>
         </div>
         <div class="nav-right">
             <a href="favorites.html" class="bookmark-btn">
@@ -70,6 +73,19 @@
             <div class="episode-info">
                 <span id="episode-number"></span>
                 <span id="anime-type"></span>
+            </div>
+            <div class="rating-section">
+                <div class="rating-stars">
+                    <i class="fas fa-star" data-rating="1"></i>
+                    <i class="fas fa-star" data-rating="2"></i>
+                    <i class="fas fa-star" data-rating="3"></i>
+                    <i class="fas fa-star" data-rating="4"></i>
+                    <i class="fas fa-star" data-rating="5"></i>
+                </div>
+                <div class="rating-info">
+                    <span class="average-rating">0.0</span>
+                    <span class="rating-count">(0 รีวิว)</span>
+                </div>
             </div>
             <p id="anime-description"></p>
         </div>
