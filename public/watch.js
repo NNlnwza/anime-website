@@ -132,6 +132,22 @@ document.addEventListener('DOMContentLoaded', () => {
             searchModal.style.display = 'none';
         }
     });
+
+    // เพิ่ม event listener สำหรับปุ่มส่งความคิดเห็น
+    const commentBtn = document.getElementById('comment-btn');
+    if (commentBtn) {
+        commentBtn.addEventListener('click', addComment);
+    }
+
+    // เพิ่ม event listener สำหรับช่อง input เมื่อกด Enter
+    const commentInput = document.getElementById('comment-input');
+    if (commentInput) {
+        commentInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                addComment();
+            }
+        });
+    }
 });
 
 function displaySearchResults(results) {
@@ -159,7 +175,11 @@ function addComment() {
     const commentInput = document.getElementById('comment-input');
     const commentText = commentInput.value.trim();
     
-    if (commentText) {
+    if (!commentText) {
+        return;
+    }
+
+    try {
         // สร้างความคิดเห็นใหม่
         const newComment = {
             id: Date.now(),
@@ -169,12 +189,27 @@ function addComment() {
             likedBy: []
         };
         
+        // ตรวจสอบการเชื่อมต่อ Firebase
+        if (!firebase.apps.length) {
+            alert('ไม่สามารถเชื่อมต่อกับระบบได้');
+            return;
+        }
+
         // บันทึกลง Firebase
         const commentsRef = firebase.database().ref('comments/' + animeId);
-        commentsRef.push(newComment);
-        
-        // ล้างช่องกรอก
-        commentInput.value = '';
+        commentsRef.push(newComment)
+            .then(() => {
+                // ล้างช่องกรอก
+                commentInput.value = '';
+                console.log('บันทึกความคิดเห็นสำเร็จ');
+            })
+            .catch((error) => {
+                console.error('เกิดข้อผิดพลาด:', error);
+                alert('ไม่สามารถบันทึกความคิดเห็นได้');
+            });
+    } catch (error) {
+        console.error('เกิดข้อผิดพลาด:', error);
+        alert('เกิดข้อผิดพลาดในการบันทึกความคิดเห็น');
     }
 }
 
@@ -188,8 +223,15 @@ function displayComments() {
         const comments = [];
         snapshot.forEach((childSnapshot) => {
             const comment = childSnapshot.val();
-            comment.key = childSnapshot.key;
-            comments.unshift(comment);
+            if (comment) {
+                // ตรวจสอบและเพิ่ม property ที่จำเป็นถ้าไม่มี
+                if (!comment.likedBy) comment.likedBy = [];
+                if (!comment.likes) comment.likes = 0;
+                if (!comment.timestamp) comment.timestamp = new Date().toISOString();
+                
+                comment.key = childSnapshot.key;
+                comments.unshift(comment);
+            }
         });
         
         commentsContainer.innerHTML = comments.map(comment => `
@@ -200,7 +242,7 @@ function displayComments() {
                         <span class="comment-time">${formatTimestamp(comment.timestamp)}</span>
                     </div>
                     <div class="comment-actions">
-                        <button class="like-btn ${comment.likedBy.includes('user') ? 'active' : ''}" 
+                        <button class="like-btn ${comment.likedBy && comment.likedBy.includes('user') ? 'active' : ''}" 
                                 onclick="handleLike('${comment.key}')">
                             <i class="fas fa-heart"></i>
                             <span>${comment.likes}</span>
@@ -209,6 +251,9 @@ function displayComments() {
                 </div>
             </div>
         `).join('');
+    }, (error) => {
+        console.error('Error fetching comments:', error);
+        commentsContainer.innerHTML = '<p class="error-message">ไม่สามารถโหลดความคิดเห็นได้</p>';
     });
 }
 
@@ -218,7 +263,12 @@ function handleLike(commentKey) {
     
     commentsRef.once('value').then((snapshot) => {
         const comment = snapshot.val();
-        const user = 'user'; // ในอนาคตควรใช้ ID ของผู้ใช้จริง
+        if (!comment) return;
+
+        if (!comment.likedBy) comment.likedBy = [];
+        if (!comment.likes) comment.likes = 0;
+
+        const user = 'user';
         const likedIndex = comment.likedBy.indexOf(user);
         
         if (likedIndex === -1) {
@@ -232,7 +282,11 @@ function handleLike(commentKey) {
         commentsRef.update({
             likes: comment.likes,
             likedBy: comment.likedBy
+        }).catch(error => {
+            console.error('Error updating like:', error);
         });
+    }).catch(error => {
+        console.error('Error fetching comment for like:', error);
     });
 }
 
@@ -255,22 +309,3 @@ function formatTimestamp(timestamp) {
         return date.toLocaleDateString('th-TH');
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadAnimeDetails();
-    displayComments();
-
-    const commentBtn = document.getElementById('comment-btn');
-    if (commentBtn) {
-        commentBtn.addEventListener('click', addComment);
-    }
-
-    const commentInput = document.getElementById('comment-input');
-    if (commentInput) {
-        commentInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                addComment();
-            }
-        });
-    }
-});
