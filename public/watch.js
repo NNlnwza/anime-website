@@ -186,7 +186,8 @@ function addComment() {
             text: commentText,
             timestamp: new Date().toISOString(),
             likes: 0,
-            likedBy: []
+            likedBy: [],
+            episode: episodeNumber // เพิ่ม episode number
         };
         
         // ตรวจสอบการเชื่อมต่อ Firebase
@@ -195,8 +196,8 @@ function addComment() {
             return;
         }
 
-        // บันทึกลง Firebase
-        const commentsRef = firebase.database().ref('comments/' + animeId);
+        // บันทึกลง Firebase โดยแยกตามอนิเมะและตอน
+        const commentsRef = firebase.database().ref(`comments/${animeId}/episode${episodeNumber}`);
         commentsRef.push(newComment)
             .then(() => {
                 // ล้างช่องกรอก
@@ -216,7 +217,14 @@ function addComment() {
 // ฟังก์ชันแสดงความคิดเห็น
 function displayComments() {
     const commentsContainer = document.getElementById('comments-container');
-    const commentsRef = firebase.database().ref('comments/' + animeId);
+    const commentsRef = firebase.database().ref(`comments/${animeId}/episode${episodeNumber}`);
+    
+    // เพิ่มหัวข้อแสดงว่าเป็นคอมเมนต์ของตอนไหน
+    const episodeTitle = document.createElement('h4');
+    episodeTitle.textContent = `ความคิดเห็น - ตอนที่ ${episodeNumber}`;
+    episodeTitle.className = 'comments-episode-title';
+    commentsContainer.innerHTML = '';
+    commentsContainer.appendChild(episodeTitle);
     
     // ติดตามการเปลี่ยนแปลงของข้อมูล
     commentsRef.on('value', (snapshot) => {
@@ -234,7 +242,7 @@ function displayComments() {
             }
         });
         
-        commentsContainer.innerHTML = comments.map(comment => `
+        const commentsHTML = comments.map(comment => `
             <div class="comment">
                 <div class="comment-content">
                     <p>${comment.text}</p>
@@ -251,15 +259,21 @@ function displayComments() {
                 </div>
             </div>
         `).join('');
+        
+        // เพิ่ม comments หลังจากหัวข้อ
+        const commentsDiv = document.createElement('div');
+        commentsDiv.className = 'comments-list';
+        commentsDiv.innerHTML = commentsHTML || '<p class="no-comments">ยังไม่มีความคิดเห็น</p>';
+        commentsContainer.appendChild(commentsDiv);
     }, (error) => {
         console.error('Error fetching comments:', error);
-        commentsContainer.innerHTML = '<p class="error-message">ไม่สามารถโหลดความคิดเห็นได้</p>';
+        commentsContainer.innerHTML += '<p class="error-message">ไม่สามารถโหลดความคิดเห็นได้</p>';
     });
 }
 
 // ฟังก์ชันจัดการไลค์
 function handleLike(commentKey) {
-    const commentsRef = firebase.database().ref('comments/' + animeId + '/' + commentKey);
+    const commentsRef = firebase.database().ref(`comments/${animeId}/episode${episodeNumber}/${commentKey}`);
     
     commentsRef.once('value').then((snapshot) => {
         const comment = snapshot.val();

@@ -887,4 +887,32 @@ h2 {
 .comment-btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(255, 215, 0, 0.2);
+}
+
+.comments-episode-title {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #444;
+}
+
+.comments-list {
+    margin-top: 1rem;
+}
+
+.no-comments {
+    color: #888;
+    text-align: center;
+    padding: 1rem;
+    font-style: italic;
+}
+
+.error-message {
+    color: #ff6b6b;
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 4px;
+    margin-top: 1rem;
 } 
