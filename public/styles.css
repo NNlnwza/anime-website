@@ -340,10 +340,12 @@ h2 {
 
 /* Comments Section */
 .comments-section {
-    background-color: #23252b;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    padding: 2rem;
+    background: linear-gradient(to bottom, #23252b, #1a1a1a);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 .comment-form {
@@ -352,23 +354,32 @@ h2 {
     margin-bottom: 1rem;
 }
 
-.comment-input {
+#comment-input {
     width: 100%;
-    padding: 1rem;
+    padding: 15px 20px;
     margin-bottom: 1rem;
-    background: #333333;
-    border: 1px solid #444444;
-    border-radius: 4px;
+    background-color: #444444;
+    border: 2px solid #555555;
+    border-radius: 12px;
     color: #fff;
     font-family: 'Kanit', sans-serif;
-    resize: vertical;
-    min-height: 60px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    height: 60px;
 }
 
-.comment-input:focus {
+#comment-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.1rem;
+}
+
+#comment-input:focus {
     outline: none;
     border-color: #ffd700;
-    background: #3a3a3a;
+    background-color: #4a4a4a;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2),
+                inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .comment-submit {
@@ -738,7 +749,6 @@ h2 {
     background: var(--plyr-color-main);
 }
 
-/* ส่วนแสดงความคิดเห็น */
 .comment-section {
     margin-top: 2rem;
     padding: 1rem;
@@ -746,58 +756,85 @@ h2 {
     border-radius: 8px;
 }
 
-.comment-section h3 {
-    color: #fff;
+.comment-input {
+    width: 100%;
+    padding: 1.2rem;
     margin-bottom: 1rem;
+    background: #333333;
+    border: 1px solid #444444;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Kanit', sans-serif;
+    resize: vertical;
+    min-height: 100px;
+    font-size: 1.1rem;
 }
 
-.comment-input-container {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-#comment-input {
-    flex: 1;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 4px;
-    background: #2a2a2a;
-    color: #fff;
+.comment-input:focus {
+    outline: none;
+    border-color: #ffd700;
+    background: #3a3a3a;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
 }
 
 .comment-btn {
-    padding: 0.5rem 1rem;
-    background: #ff4757;
-    color: white;
+    background-color: #ffd700;
+    color: #000;
     border: none;
+    padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background-color 0.3s;
 }
 
 .comment-btn:hover {
-    background: #ff6b81;
+    background-color: #ffc800;
 }
 
 .comments-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    margin-top: 2rem;
 }
 
-.comment {
+.comment-item {
     background: #2a2a2a;
     padding: 1rem;
+    margin-bottom: 1rem;
     border-radius: 4px;
+    position: relative;
 }
 
-.comment-content {
+.comment-text {
     color: #fff;
+    margin-bottom: 0.5rem;
+    font-family: 'Kanit', sans-serif;
+}
+
+.comment-timestamp {
+    color: #888;
+    font-size: 0.8rem;
+    font-family: 'Kanit', sans-serif;
+}
+
+.delete-comment {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #ff4444;
+    color: #fff;
+    border: none;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+}
+
+.delete-comment:hover {
+    background: #ff6666;
 }
 
 .comment-actions {
     display: flex;
+    align-items: center;
     gap: 1rem;
     margin-top: 0.5rem;
 }
@@ -805,17 +842,49 @@ h2 {
 .like-btn {
     background: none;
     border: none;
-    color: #666;
+    color: #888;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-family: 'Kanit', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.like-btn:hover {
+    color: #ffd700;
 }
 
 .like-btn.active {
-    color: #ff4757;
+    color: #ffd700;
 }
 
-.like-btn i {
-    font-size: 1.2rem;
+.like-count {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.comment-btn {
+    background: linear-gradient(45deg, #ffd700, #ffed4a);
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+    float: right;
+}
+
+.comment-btn:hover {
+    background: linear-gradient(45deg, #ffed4a, #ffd700);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+}
+
+.comment-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.2);
 } 

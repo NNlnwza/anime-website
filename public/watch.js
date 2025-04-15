@@ -158,7 +158,6 @@ function displaySearchResults(results) {
 function addComment() {
     const commentInput = document.getElementById('comment-input');
     const commentText = commentInput.value.trim();
-    const animeId = getAnimeIdFromUrl();
     
     if (commentText) {
         // สร้างความคิดเห็นใหม่
@@ -190,7 +189,6 @@ function addComment() {
 // ฟังก์ชันแสดงความคิดเห็น
 function displayComments() {
     const commentsContainer = document.getElementById('comments-container');
-    const animeId = getAnimeIdFromUrl();
     const comments = allComments[animeId] || [];
     
     commentsContainer.innerHTML = comments.map(comment => `
@@ -211,7 +209,6 @@ function displayComments() {
 
 // ฟังก์ชันกดไลค์
 function handleLike(commentId) {
-    const animeId = getAnimeIdFromUrl();
     const comments = allComments[animeId] || [];
     const comment = comments.find(c => c.id === commentId);
     
@@ -236,12 +233,15 @@ function handleLike(commentId) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const commentBtn = document.querySelector('.comment-btn');
+    loadAnimeDetails();
+    displayComments();
+
+    const commentBtn = document.getElementById('comment-btn');
     if (commentBtn) {
         commentBtn.addEventListener('click', addComment);
     }
 
-    const commentInput = document.querySelector('.comment-input');
+    const commentInput = document.getElementById('comment-input');
     if (commentInput) {
         commentInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
@@ -249,6 +249,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    displayComments();
 });
