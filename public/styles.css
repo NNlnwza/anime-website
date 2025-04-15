@@ -779,10 +779,25 @@ section h2 {
     color: #fff;
 }
 
-.no-favorites-message i {
+.no-favorites-message i.fa-heart-broken {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: #ff6b6b;
+    background: linear-gradient(45deg, #ff4757, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.7;
+    }
 }
 
 .no-favorites-message h3 {
@@ -793,52 +808,43 @@ section h2 {
 .no-favorites-message p {
     color: #ccc;
     margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.no-favorites-message p i.fa-heart {
+    color: #ccc;
+    font-size: 1rem;
 }
 
 .back-to-home {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background-color: #ffd700;
-    color: #000;
+    background-color: #ff4757;
+    color: #fff;
     border-radius: 5px;
     text-decoration: none;
     transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.back-to-home i {
+    font-size: 1rem;
 }
 
 .back-to-home:hover {
-    background-color: #ffed4a;
+    background-color: #ff6b6b;
     transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
-    .favorites-container .anime-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 1rem;
-        padding: 0.5rem;
-    }
-
-    .favorites-header h1 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .favorites-subtitle {
+    .back-to-home {
         font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
     }
 
-    .favorites-page {
-        padding: 0.5rem;
-    }
-
-    .no-favorites-message i {
-        font-size: 2rem;
-    }
-
-    .no-favorites-message h3 {
-        font-size: 1.2rem;
-    }
-
-    .no-favorites-message p {
+    .back-to-home i {
         font-size: 0.9rem;
     }
 }
