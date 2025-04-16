@@ -770,12 +770,13 @@ const animeData = [
         id: 'blue-box',
         title: 'Blue Box',
         type: 'ซับไทย',
-        description: 'ทกิ นักเรียนมัธยมต้นที่แอบชอบรุ่นพี่สาว ชินัตสึ นักบาสสาวดาวเด่น ทั้งสองต้องมาอยู่บ้านเดียวกัน ทำให้ความสัมพันธ์ค่อยๆ พัฒนา ท่ามกลางความฝันและการแข่งขันกีฬา.',
+        description: 'ไทกิ นักเรียนมัธยมต้นที่แอบชอบรุ่นพี่สาว ชินัตสึ นักบาสสาวดาวเด่น ทั้งสองต้องมาอยู่บ้านเดียวกัน ทำให้ความสัมพันธ์ค่อยๆ พัฒนา ท่ามกลางความฝันและการแข่งขันกีฬา.',
         image: 'images/box.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/l329cauolla6o8o227q0r/Bluebox-Netflix.mp4?rlkey=kraxd9crhqo1ua4hj7mqrr20z&dl=0"),
         episodes: [
             {
                 number: 1,
-                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/erg877vckd8yyyvjt6uls/ALL-IN-ONE-Ao-no-Hako-01-1080p.mp4?rlkey=chsqb5q1v3etyk07ktchg3gsq&st=h0mjpf3y&dl=0 ")
+                videoUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/erg877vckd8yyyvjt6uls/ALL-IN-ONE-Ao-no-Hako-01-1080p.mp4?rlkey=chsqb5q1v3etyk07ktchg3gsq&st=h0mjpf3y&dl=0")
             },
             {
                 number: 2,

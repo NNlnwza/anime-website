@@ -18,6 +18,8 @@ function loadAnimeDetails() {
     document.getElementById('anime-title').textContent = anime.title;
     document.getElementById('episode-number').textContent = `ตอนที่ ${episodeNumber}`;
     document.getElementById('anime-type').textContent = anime.type;
+    document.getElementById('release-date').textContent = `วันที่ฉาย: ${anime.releaseDate}`;
+    document.getElementById('total-episodes').textContent = `${anime.episodes.length} ตอน`;
     document.getElementById('anime-description').textContent = anime.description;
 
     const episodeGrid = document.getElementById('episode-grid');
@@ -27,7 +29,10 @@ function loadAnimeDetails() {
         anime.episodes.forEach(episode => {
             const episodeItem = document.createElement('div');
             episodeItem.className = `episode-item ${episode.number === episodeNumber ? 'active' : ''}`;
-            episodeItem.innerHTML = `<span class="episode-number">ตอนที่ ${episode.number}</span>`;
+            episodeItem.innerHTML = `
+                <span class="episode-number">ตอนที่ ${episode.number}</span>
+                <span class="episode-title">${episode.title || ''}</span>
+            `;
             
             episodeItem.addEventListener('click', () => {
                 window.location.href = `watch.html?id=${animeId}&ep=${episode.number}`;
@@ -445,7 +450,7 @@ function initRatingSystem() {
             .then(() => {
                 currentRating = rating;
                 isRated = true;
-                // บันทึกลงใน localStorage พร้อม userId
+                // บันทึกลง localStorage พร้อม userId
                 localStorage.setItem(`rating_${currentAnimeId}`, JSON.stringify({
                     rating: rating,
                     userId: userId

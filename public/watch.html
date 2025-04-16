@@ -51,53 +51,47 @@
         </div>
     </nav>
 
-    <!-- Search Modal -->
-    <div class="search-modal" style="display: none;">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="ค้นหาอนิเมะ...">
-            <div class="search-results"></div>
-        </div>
-    </div>
-
     <main class="watch-page">
-        <div class="video-container">
-            <div class="video-player">
-                <video id="player" playsinline controls>
-                    <source type="video/mp4">
-                </video>
-            </div>
-        </div>
-        
-        <div class="anime-details">
-            <h1 id="anime-title"></h1>
-            <div class="episode-info">
-                <span id="episode-number"></span>
-                <span id="anime-type"></span>
-            </div>
-            <div class="rating-section">
-                <div class="rating-stars">
-                    <i class="fas fa-star" data-rating="1"></i>
-                    <i class="fas fa-star" data-rating="2"></i>
-                    <i class="fas fa-star" data-rating="3"></i>
-                    <i class="fas fa-star" data-rating="4"></i>
-                    <i class="fas fa-star" data-rating="5"></i>
+        <div class="anime-preview">
+            <div class="preview-container">
+                <div class="video-player">
+                    <video id="player" playsinline muted loop autoplay>
+                        <source type="video/mp4">
+                    </video>
                 </div>
-                <div class="rating-info">
-                    <span class="average-rating">0.0</span>
-                    <span class="rating-count">(0 รีวิว)</span>
+                <div class="preview-overlay">
+                    <h1 id="anime-title"></h1>
+                    <div class="anime-meta">
+                        <span id="anime-type"></span>
+                        <span id="release-date"></span>
+                        <span id="total-episodes"></span>
+                    </div>
+                    <div class="rating-section">
+                        <div class="rating-stars">
+                            <i class="fas fa-star" data-rating="1"></i>
+                            <i class="fas fa-star" data-rating="2"></i>
+                            <i class="fas fa-star" data-rating="3"></i>
+                            <i class="fas fa-star" data-rating="4"></i>
+                            <i class="fas fa-star" data-rating="5"></i>
+                        </div>
+                        <div class="rating-info">
+                            <span class="average-rating">0.0</span>
+                            <span class="rating-count">(0 รีวิว)</span>
+                        </div>
+                    </div>
+                    <p id="anime-description"></p>
                 </div>
             </div>
-            <p id="anime-description"></p>
         </div>
 
-        <div class="episode-list">
+        <div class="episode-section">
             <h2>ตอนทั้งหมด</h2>
             <div class="episode-grid" id="episode-grid">
                 <!-- Episodes will be added here by JavaScript -->
             </div>
         </div>
 
-        <div class="comment-section">
+        <div class="comment-section" style="display: none;">
             <h3>ความคิดเห็น</h3>
             <div class="comment-input-container">
                 <input type="text" id="comment-input" placeholder="แสดงความคิดเห็น...">
