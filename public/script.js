@@ -65,7 +65,7 @@ function toggleSearchModal() {
 // ฟังก์ชันเล่นอนิเมะ
 function playAnime(animeId) {
     incrementViewCount(animeId);
-    window.location.href = `watch.html?id=${animeId}&ep=1`;
+    window.location.href = `detail.html?id=${animeId}&ep=1`;
 }
 
 // ฟังก์ชันสร้างการ์ดอนิเมะ

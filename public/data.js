@@ -18,6 +18,7 @@ const animeData = [
         type: "ซับไทย",
         description: "เรื่องราวของ Momo Ayase และ Ken Takakura สองนักเรียนมัธยมที่เชื่อในสิ่งที่แตกต่างกัน คนหนึ่งเชื่อเรื่องผีอีกคนเชื่อเรื่องUFO พวกเขาต้องมาร่วมมือกันต่อสู้กับเหตุการณ์เหนือธรรมชาติ",
         image: "images/dan.jpg",
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/5a0n9x84lij0w1dnrlszw/Dandadan-Official-Trailer.mp4?rlkey=406qpycl108r45nnvmt75i66m&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -75,6 +76,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'โครงการคัดเลือกกองหน้าที่เห็นแก่ตัวที่สุดในประเทศญี่ปุ่น เพื่อสร้างกองหน้าระดับโลก ผู้แพ้จะถูกห้ามเป็นตัวแทนทีมชาติตลอดกาล',
         image: 'images/bluelock.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/muzhn85g2tp84rap55y9k/Blue-Lock-_-Official-Trailer.mp4?rlkey=m1kqljrg7o6a3iorhkj6nb2i1&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -132,6 +134,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'ในโลกที่ผู้คนถูกเปลี่ยนเป็นอสูรไฟอย่างไม่ทราบสาเหตุหน่วยดับเพลิงพิเศษถูกจัดตั้งขึ้นเพื่อต่อสู้กับภัยคุกคามนี้',
         image: 'images/fire.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/o8bv86eiyp64ldj1ljp2r/Fire-Force-OFFICIAL-PREVIEW.mp4?rlkey=ckjc1bw8t4r4sto2wmzrzfm82&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -189,6 +192,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'ซอง จินวู ฮันเตอร์ที่อ่อนแอที่สุดในโลก ได้รับพลังพิเศษที่ทำให้เขาสามารถเพิ่มระดับได้ไม่จำกัดเขาจึงออกเดินทางเพื่อกลายเป็นฮันเตอร์ที่แข็งแกร่งที่สุด',
         image: 'images/solo.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/zdu2e4www60s1xreisiw8/Solo-Leveling-OFFICIAL-TRAILER.mp4?rlkey=dgergsco41kyc9paf31xhwjoc&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -246,6 +250,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'ซุนาโตะ ราคุโร่ ผู้เชี่ยวชาญในการเล่นเกมขยะ ได้เริ่มเล่นเกม VRMMO ชื่อดังอย่าง Shangri-La Frontier และต้องเผชิญกับความท้าทายมากมาย',
         image: 'images/Shan.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/7m5a9rvhqptuhrq9g0xwl/Shangri-la-Frontier-_-OFFICIAL-TRAILER-3.mp4?rlkey=iy0so28vvoqy44k0d9h51dfd4&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -303,6 +308,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'ทันจิโร่ คามาโดะ เด็กหนุ่มที่สูญเสียครอบครัวจากการถูกอสูรสังหาร และน้องสาวเนซึโกะถูกเปลี่ยนเป็นอสูร เขาจึงออกเดินทางเพื่อกลายเป็นนักล่าอสูรและหาทางรักษาน้องสาว',
         image: 'images/demon.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/742s6ykzbvmsqdaq5h263/Demon-Slayer_-Kimetsu-no-Yaiba-Trailer-1.mp4?rlkey=wulrg4ughjk0qmcqk3n1xc5tb&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -360,6 +366,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'คาฟกะ ฮิบิโนะ ชายผู้ทำงานกำจัดซากไคจู มีความฝันที่จะเข้าร่วมกองกำลังป้องกัน แต่ชีวิตของเขาเปลี่ยนไปเมื่อได้รับพลังลึกลับที่ทำให้กลายเป็นไคจูได้',
         image: 'images/kaiju.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/354kxqdts5d7el03ciw0d/KAIJU-NO.8-Official-Main-Trailer.mp4?rlkey=s3ismmfkzp8940tu5fs0xwaux&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -417,6 +424,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'การผจญภัยของนัตสึและลูซี่ในกิลด์เวทมนตร์ Fairy Tail พวกเขาต้องเผชิญกับศัตรูที่แข็งแกร่ง ปกป้องเพื่อน และค้นหาความลับของมังกรที่หายไป',
         image: 'images/fariy.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/6d6ei4mn6eky797m0wj9j/PV-FAIRY-TAIL-100-7-7-5-30-6.mp4?rlkey=4qgspitexq5w8xer6vau2l5s6&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -474,6 +482,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'ริน โอคุมุระ เด็กหนุ่มที่ค้นพบว่าตัวเองเป็นลูกของซาตาน เขาตัดสินใจเข้าเรียนในโรงเรียนนักปราบปีศาจเพื่อต่อสู้กับปีศาจและพิสูจน์ตัวเอง',
         image: 'images/blue.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/jjdyzp2vic55sq212vfve/Blue-Exorcist-Shimane-Illuminati-Saga-_-OFFICIAL-TRAILER.mp4?rlkey=4rzaodaupr3h677meoyw53u73&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -531,6 +540,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'ทาโร่ ซากาโมโต้ อดีตมือสังหารระดับตำนานที่ผันตัวมาเป็นเจ้าของร้านสะดวกซื้อและมีครอบครัว แต่อดีตของเขาก็ยังคงตามมาหลอกหลอน',
         image: 'images/sa.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/6d6ei4mn6eky797m0wj9j/PV-FAIRY-TAIL-100-7-7-5-30-6.mp4?rlkey=4qgspitexq5w8xer6vau2l5s6&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -588,6 +598,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'ในปียูโทเปียปี 2052 ดร.สกินเนอร์ได้ค้นพบยาแก้สรรพโรค ในปี 2055 สกินเนอร์ประกาศว่ายาชนิดนี้มีครึ่งชีวิตสามปี และอีกไม่นานทุกคนที่ใช้ยาชนิดนี้จะต้องเสียชีวิต',
         image: 'images/la.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/kpp8xztft2afgrdubw8vk/LAZARUS-PV-_LAZARUS_-Main-Trailer.mp4?rlkey=utwo4okygjgipngrn7vkrfnmi&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -601,6 +612,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'ในโลกที่เวทมนตร์คือทุกสิ่ง มาช เบิร์นเนอร์ เด็กหนุ่มที่เกิดมาโดยไม่มีพลังเวทมนตร์ แต่มีพละกำลังมหาศาล ต้องเข้าเรียนในโรงเรียนเวทมนตร์เพื่อปกป้องตัวเองและครอบครัว',
         image: 'images/mashle.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/efnfy0isego65c0gr5w6e/MASHLE-MAGIC-AND-MUSCLES-Main-Trailer.mp4?rlkey=7jd3ybq4s8ryjfpox934bbdax&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -658,6 +670,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'โรงเรียนมัธยมปลายโคโด อิคุเซย์ สถาบันที่รับประกันการเข้ามหาวิทยาลัยและการได้งาน 100% แต่ความจริงแล้วมีเพียงนักเรียนชั้น A เท่านั้นที่ได้รับสิทธิพิเศษ ส่วนชั้น D ที่อายาโนโคจิอยู่กลับถูกดูถูกว่าเป็นเศษขยะ',
         image: 'images/classroom.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/dt6xneiw29k9ptetjcxbu/TV-5.mp4?rlkey=u37o2jk9s4lquc3rev9dfqrej&dl=0"),
         episodes: [
             {
                 number: 1,
@@ -715,6 +728,7 @@ const animeData = [
         type: 'ซับไทย',
         description: 'อิตาโดริ ยูจิ นักเรียนมัธยมปลายที่มีพละกำลังเหนือมนุษย์ วันหนึ่งเขาได้กลืนนิ้วต้องคำสาปของสุคุนะเข้าไปเพื่อช่วยเพื่อน ทำให้เขาต้องเข้าร่วมกับโรงเรียนไสยเวท เพื่อตามหานิ้วที่เหลือของสุคุนะ',
         image: 'images/jujutsu.jpg',
+        trailerUrl: getDropboxDirectURL("https://www.dropbox.com/scl/fi/91dtzb2ztn136lap8dk64/JUJUTSU-KAISEN-OFFICIAL-TRAILER.mp4?rlkey=ctp708nahzdopzat6z137uacd&dl=0"),
         episodes: [
             {
                 number: 1,
