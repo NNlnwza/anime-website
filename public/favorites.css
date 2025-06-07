@@ -120,43 +120,72 @@
 }
 
 .button-group {
-    position: absolute;
-    top: 10px;
-    left: 10px;
     display: flex;
     gap: 0.5rem;
-    opacity: 0;
-    transition: all 0.3s ease;
+    margin-top: 0.5rem;
 }
 
-.anime-card:hover .button-group {
-    opacity: 1;
-}
-
-.watch-btn, .favorite-btn {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
+.watch-btn,
+.favorite-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    border: 2px solid #ffd700;
-    color: #ffd700;
-    cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 0.9rem;
 }
 
-.watch-btn:hover, .favorite-btn:hover {
-    background-color: #ffd700;
+.watch-btn {
+    color: #ffd700;
+    border-color: #ffd700;
+    flex: 1;
+}
+
+.watch-btn:hover {
+    background: #ffd700;
     color: #000;
-    transform: scale(1.1);
+    transform: scale(1.05);
+}
+
+.favorite-btn {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.favorite-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ff4757;
+    transform: scale(1.05);
 }
 
 .favorite-btn.active {
-    background-color: #ffd700;
-    color: #000;
+    color: #ff4757;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.favorite-btn i {
+    transition: all 0.3s ease;
+}
+
+.favorite-btn:hover i {
+    transform: scale(1.1);
+}
+
+.favorite-btn.active i {
+    transform: scale(1.1);
 }
 
 .no-favorites-message {
@@ -226,5 +255,10 @@
     .back-to-home {
         font-size: 1rem;
         padding: 0.7rem 1.2rem;
+    }
+    .watch-btn,
+    .favorite-btn {
+        padding: 0.4rem;
+        font-size: 0.9rem;
     }
 } 
