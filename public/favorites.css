@@ -1,0 +1,230 @@
+/* Favorites Page Styles (เหมือน Old/styles.css) */
+
+.favorites-page {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.favorites-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 4rem 0 2rem 0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.favorites-header h1 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.favorites-header h1 i {
+    color: #ff4757;
+    margin-right: 0.5rem;
+}
+
+.favorites-subtitle {
+    color: #888;
+    font-size: 1.1rem;
+}
+
+.favorites-container {
+    position: relative;
+    min-height: 400px;
+}
+
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.anime-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    aspect-ratio: 2/3;
+}
+
+.anime-card:hover {
+    transform: scale(1.05);
+}
+
+.anime-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s;
+}
+
+.anime-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.anime-card:hover .anime-info {
+    transform: translateY(0);
+}
+
+.anime-card:hover img {
+    filter: blur(5px) brightness(0.7);
+}
+
+.anime-info h3 {
+    font-family: 'Niramit', sans-serif;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 700;
+}
+
+.type {
+    font-family: 'Kanit', sans-serif;
+    display: inline-block;
+    font-size: 0.875rem;
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.description {
+    font-family: 'Kanit', sans-serif;
+    font-size: 0.875rem;
+    color: #e0e0e0;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    font-weight: 300;
+}
+
+.description strong {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.anime-card:hover .description {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.button-group {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.anime-card:hover .button-group {
+    opacity: 1;
+}
+
+.watch-btn, .favorite-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.watch-btn:hover, .favorite-btn:hover {
+    background-color: #ffd700;
+    color: #000;
+    transform: scale(1.1);
+}
+
+.favorite-btn.active {
+    background-color: #ffd700;
+    color: #000;
+}
+
+.no-favorites-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #666;
+}
+
+.no-favorites-message i.fa-heart-broken {
+    font-size: 4rem;
+    color: #ff4757;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.no-favorites-message h3 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: #fff;
+}
+
+.no-favorites-message p {
+    margin: 1rem 0;
+    color: #888;
+}
+
+.back-to-home {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #ff4757;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.back-to-home:hover {
+    background-color: #ff6b81;
+}
+
+.back-to-home i {
+    margin-right: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .favorites-page {
+        padding: 1rem;
+    }
+    .favorites-header h1 {
+        font-size: 2rem;
+    }
+    .favorites-subtitle {
+        font-size: 1rem;
+    }
+    .no-favorites-message {
+        padding: 2rem 0.5rem;
+    }
+    .no-favorites-message h3 {
+        font-size: 1.3rem;
+    }
+    .back-to-home {
+        font-size: 1rem;
+        padding: 0.7rem 1.2rem;
+    }
+} 

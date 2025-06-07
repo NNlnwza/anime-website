@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeHiHi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="favorites.css">
+    <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Kanit:wght@300;400;500;600&family=Kodchasan:wght@400;500;600;700&family=Niramit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="images/animehihi.ico">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div href="index.html" class="nav-brand">AnimeHiHi</div>
+        </div>
+        <div class="nav-menu">
+            <a href="index.html" class="nav-item">หน้าแรก</a>
+            <a href="#" class="nav-item">อนิเมะทั้งหมด</a>
+            <a href="#" class="nav-item">อนิเมะยอดนิยม</a>
+            <a href="#" class="nav-item">อนิเมะใหม่</a>
+        </div>
+        <div class="nav-right">
+            <a href="favorites.html" class="bookmark-btn active">
+                <i class="fas fa-bookmark"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Search Modal -->
+    <div class="search-modal">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="ค้นหาอนิเมะ...">
+            <div class="search-results"></div>
+        </div>
+    </div>
+
+    <main class="favorites-page">
+        <div class="favorites-header">
+            <h1><i class="fas fa-heart"></i> อนิเมะที่ถูกใจ</h1>
+            <p class="favorites-subtitle">รวมอนิเมะที่คุณชื่นชอบทั้งหมด</p>
+        </div>
+
+        <div class="favorites-container">
+            <div class="anime-grid" id="favorites-grid">
+                <!-- Template for anime cards -->
+                <template id="anime-card-template">
+                    <div class="anime-card">
+                        <img src="" alt="">
+                        <div class="anime-info">
+                            <h3></h3>
+                            <span class="type"></span>
+                            <p class="description"></p>
+                            <div class="button-group">
+                                <button class="watch-btn">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="favorite-btn">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="no-favorites-message" style="display: none;">
+                <i class="fas fa-heart-broken"></i>
+                <h3>ยังไม่มีอนิเมะที่ถูกใจ</h3>
+                <p>กดที่ไอคอนหัวใจ <i class="fas fa-heart"></i> บนอนิเมะที่คุณชื่นชอบเพื่อเพิ่มในรายการนี้</p>
+                <a href="index.html" class="back-to-home">
+                    <i class="fas fa-arrow-left"></i> กลับไปหน้าหลัก
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="favorites.js"></script>
+</body>
+</html> 
